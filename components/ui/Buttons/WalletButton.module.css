@@ -1,0 +1,26 @@
+.walletButton {
+    background-color: #10B981 !important; /* Green color */
+    color: white !important;
+    transition: background-color 0.3s ease !important;
+  }
+  
+  .walletButton:hover {
+    background-color: #059669 !important; /* Darker green on hover */
+  }
+  
+  /* Override more specific selectors */
+  .walletButton.wallet-adapter-button-trigger,
+  .walletButton.wallet-adapter-button-disconnect {
+    background-color: #10B981 !important;
+  }
+  
+  .walletButton.wallet-adapter-button-trigger:hover,
+  .walletButton.wallet-adapter-button-disconnect:hover {
+    background-color: #059669 !important;
+  }
+  
+  /* Ensure text color remains white */
+  .walletButton.wallet-adapter-button-trigger .wallet-adapter-button-start-icon,
+  .walletButton.wallet-adapter-button-disconnect .wallet-adapter-button-start-icon {
+    color: white !important;
+  }

@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* @layer utilities{
+   .wallet-css{
+       @apply background-color: rgb(240,253,244) !important;
+       @apply border: 2px solid green !important;
+       @apply border-radius: 12px !important;
+       @apply color: black !important;
+    }
+     
+    .wallet-css:hover {
+       @apply background-color: rgb(84, 218, 84) !important;
+      @apply border: 2px solid green !important;
+      @apply color: white !important;
+    }
+} */
+
+ 

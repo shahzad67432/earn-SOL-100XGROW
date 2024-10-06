@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             Int           @id @default(autoincrement())
+  name           String
+  email          String        @unique
+  premiumAccess  Boolean       @default(false)
+  views          Int           @default(0)
+  previous_views Int           @default(0)
+  earnings       Earning[]
+  leaderboards   Leaderboard[]
+  posts          Post[]
+  submissions    Submission[]
+}
+
+model Post {
+  id     Int    @id @default(autoincrement())
+  title       String @default("")
+  postUrl     String @default("")
+  imageUrl    String @default("")
+  urlToFetchViews    String @default("")
+  userId Int
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model Earning {
+  id            Int      @id @default(autoincrement())
+  userId        Int
+  title         String?   @default("")
+  month         DateTime @default(now())
+  totalEarnings Float    @default(0)
+  user          User     @relation(fields: [userId], references: [id])
+}
+
+model Test {
+  id          Int           @id @default(autoincrement())
+  description String
+  duration    Int
+  imageUrl    String @default("")
+  questions   Json
+  title       String
+  type        String
+  fee         Float?
+  isPremium   Boolean @default(false)
+  paidUsers   Int @default(0)
+  totalFee    Float?
+  isContest   Boolean @default(false)
+  bountyAmount Float?
+  leaderboard Leaderboard[]
+  submissions Submission[]
+}
+
+model Learn {
+  id          Int           @id @default(autoincrement())
+  title       String
+  learnImage String[]
+  content     String
+  type        String
+}
+
+model Submission {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  testId    Int
+  answers   Json
+  score     Int
+  createdAt DateTime @default(now())
+  test      Test     @relation(fields: [testId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Leaderboard {
+  id           Int  @id @default(autoincrement())
+  userId       Int
+  testId       Int
+  highestScore Int
+  test         Test @relation(fields: [testId], references: [id])
+  user         User @relation(fields: [userId], references: [id])
+}
