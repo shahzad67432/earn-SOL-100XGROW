@@ -1,31 +1,28 @@
 "use client"
 import { useRouter } from "next/navigation";
-import { sendPayment } from "@/actions/payout";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { LoginButton } from "@/components/LoginButton";
+import LandingPage1 from "@/components/landing/Section1";
+import LandingPage2 from "@/components/landing/Section2";
+import LandingPage3 from "@/components/landing/Section3";
+import HeroSection from "@/components/landing/HeroSection1";
+import HowItWorksQuizzes from "@/components/landing/HowItWorksSection";
+import HowItWorksBlogs from "@/components/landing/HowItWorksSection2";
+import HowItWorksQuizzes11 from "@/components/landing/HowItWorksSection11";
+import LeaderboardSection from "@/components/landing/LeaderBoardSection";
+import LearnSection from "@/components/landing/LearnSection";
+import ProfileDashboardSection from "@/components/landing/ProfileSection";
+import HIWS from "@/components/landing/HIWS";
 
 export default function Home() {
-  const router = useRouter();
-  const {publicKey, sendTransaction} = useWallet();
-  const connection = useConnection();
   return (
     <>
-      <div onClick={()=>{router.push('/dashboard')}} className="flex flex-col justify-center items-center font-bold text-3xl text-red-700 w-full h-screen">
-        <h1 className="hover:shadow-md hover:text-6xl cursor-pointer rounded-md">
-          Landing page
-        </h1>
-        <p className="text-pink-600">
-          Earn <span className="text-red-700">SOLANA </span>/ micro payemnts through writting blogs.
-        </p>
-        <LoginButton/>
-        <div>
-        </div>
+      <div className="bg-green-50">
+        <HeroSection/>
+        <HowItWorksQuizzes11/>
+        <LeaderboardSection/>
+        <LearnSection/>
+        <ProfileDashboardSection/>
       </div>
-      <button onClick={()=>{
-        
-      }}>
-        Payout
-      </button>
     </>
   );
 }
