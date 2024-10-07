@@ -4,10 +4,10 @@ import { User, CreditCard, Zap, Shield, BarChart2, ArrowRight } from 'lucide-rea
 
 const ProfileDashboardSection: React.FC = () => {
   const features = [
-    { icon: <CreditCard className="w-6 h-6" />, title: "Payment History", description: "Track all your earnings and transactions in one place." },
+    { icon: <CreditCard className="w-6 h-6" />, title: "Payment History", description: "Track all your earnings in one place." },
     { icon: <Zap className="w-6 h-6" />, title: "Fast Transactions", description: "Experience lightning-fast SOL-based transactions." },
     { icon: <Shield className="w-6 h-6" />, title: "Secure Wallet", description: "Connect your SOL wallet for safe and easy transfers." },
-    { icon: <BarChart2 className="w-6 h-6" />, title: "Performance Metrics", description: "View your quiz performance and earnings over time." },
+    { icon: <BarChart2 className="w-6 h-6" />, title: "Performance Metrics", description: "View your quiz quiz and blogs earnings" },
   ];
 
   return (

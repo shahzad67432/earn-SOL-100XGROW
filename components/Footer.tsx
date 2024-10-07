@@ -84,19 +84,10 @@ const Footer = () => {
         transition={{ duration: 0.6, delay: 0.6 }}
         className="flex justify-center space-x-6 mb-10"
         >
-          <Link href="https://facebook.com" className="text-green-700 hover:text-green-900 transition-colors duration-300">
-            <Facebook className="w-6 h-6" />
-          </Link>
-          <Link href="https://instagram.com" className="text-green-700 hover:text-green-900 transition-colors duration-300">
-            <Instagram className="w-6 h-6" />
-          </Link>
-          <Link href="https://twitter.com" className="text-green-700 hover:text-green-900 transition-colors duration-300">
-            <Twitter className="w-6 h-6" />
-          </Link>
-          <Link href="https://youtube.com" className="text-green-700 hover:text-green-900 transition-colors duration-300">
+          <Link href="https://www.youtube.com/@Learnwithshahzad-sp5dx" className="text-green-700 hover:text-green-900 transition-colors duration-300">
             <Youtube className="w-6 h-6" />
           </Link>
-          <Link href="https://linkedin.com" className="text-green-700 hover:text-green-900 transition-colors duration-300">
+          <Link href="https://www.linkedin.com/in/shahzad-ali-225893298/" className="text-green-700 hover:text-green-900 transition-colors duration-300">
             <Linkedin className="w-6 h-6" />
           </Link>
         </motion.div>

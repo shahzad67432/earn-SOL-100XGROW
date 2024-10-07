@@ -49,9 +49,9 @@ const LearnSection: React.FC = () => {
                 </div>
                 <h3 className="text-3xl font-semibold text-green-950 mb-4">{path.title}</h3>
                 <p className="text-green-800 text-lg mb-6">
-                  Comprehensive {path.title.toLowerCase()} level courses to build your Solana expertise.
+                  {path.title.toLowerCase()} level courses to build your Solana expertise.
                 </p>
-                <a href={`#${path.title.toLowerCase()}-courses`} className="text-green-950 font-semibold flex items-center hover:text-green-700 transition-colors duration-300">
+                <a href={"/learn"} className="text-green-950 font-semibold flex items-center hover:text-green-700 transition-colors duration-300">
                   Explore {path.title} Courses <ArrowRight className="ml-2 w-5 h-5" />
                 </a>
               </div>
@@ -71,12 +71,12 @@ const LearnSection: React.FC = () => {
               Dive Deep into Solana
             </h3>
             <p className="text-green-800 text-xl text-center max-w-3xl mx-auto mb-10 leading-relaxed">
-              Our curated learning paths cover everything from basic concepts to advanced Solana development. 
+              Our learning paths cover everything from basic concepts to advanced Solana development and core concepts of web 3 and finance. 
               Master the skills needed to build the next generation of decentralized applications.
             </p>
             <div className="flex justify-center">
               <a 
-                href="#explore-courses" 
+                href="/learn" 
                 className="bg-gradient-to-r from-green-600 to-green-500 text-white px-10 py-4 rounded-lg text-xl font-semibold hover:from-green-500 hover:to-green-400 transition duration-300 shadow-lg transform hover:-translate-y-1"
               >
                 Explore All Courses

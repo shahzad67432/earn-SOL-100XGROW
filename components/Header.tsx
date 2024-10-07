@@ -30,9 +30,6 @@ export const Appbar = () => {
       <div className="container mx-auto flex flex-wrap justify-between items-center">
         {/* Left: Logo */}
         <motion.div 
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
           className="text-3xl font-bold"
         >
           <Link href="/" className="text-green-800 hover:text-green-600 transition-colors duration-300">100xGrow</Link>
@@ -40,7 +37,7 @@ export const Appbar = () => {
 
         {/* Middle: Navigation Links (hidden on mobile) */}
         <nav className="hidden lg:flex space-x-6">
-          {['Profile', 'Quizzes', 'Community', 'Learn', 'Leaderboard', 'Post'].map((item, index) => (
+          {['Profile', 'Contest', 'blogs', 'Learn', 'Leaderboard', 'Publishpost'].map((item, index) => (
             <motion.div
               key={item}
               initial={{ opacity: 0, y: -20 }}
@@ -64,9 +61,6 @@ export const Appbar = () => {
 
           {/* Auth Button (hidden on mobile) */}
           <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
             className="hidden lg:block"
           >
             {session ? (
@@ -110,7 +104,7 @@ export const Appbar = () => {
               className="w-full lg:hidden mt-4 bg-white rounded-md shadow-lg overflow-hidden"
             >
               <nav className="flex flex-col">
-                {['Profile', 'Quizzes', 'Community', 'Learn', 'Leaderboard', 'Post'].map((item, index) => (
+                {['Profile', 'Contest', 'blogs', 'Learn', 'Leaderboard', 'Publishpost'].map((item, index) => (
                   <Link 
                     key={item}
                     href={`/${item.toLowerCase()}`} 

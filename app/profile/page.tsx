@@ -5,6 +5,7 @@ import { sendPerEarningAction } from "@/actions/sendPerEarningAction";
 import { getUser } from "@/actions/user";
 import PremiumTestPage from "@/components/PremiumTests";
 import TestCard from "@/components/TestCard";
+import ProfilePageLoading from "@/components/loading/ProfilePageLoading";
 import ViewsButton from "@/components/ui/Buttons/ViewsButton";
 import UpdateViewsEarningButton from "@/components/ui/Buttons/updateViewsEarning";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
@@ -12,13 +13,14 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { redirect, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { FaBullseye } from "react-icons/fa6";
 
 const ProfilePage = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [user, setUser] = useState<any>({});
   const [totalEarning, setTotalEarning] = useState<number>(0);
   const [blogsEarning, setBlogsEarning] = useState<number>(0);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [totalView, setTotalViews] = useState(0)
   const [userPosts, setUserPosts] = useState<any[]>([]);
   const [earning, setEarning] = useState<any[]>([]);
@@ -29,7 +31,9 @@ const ProfilePage = () => {
 
   const fetchUserEarnings = async (userId: number) => {
     try {
+      setLoading(true);
       const response = await getEarning(userId);
+      setLoading(false);
       console.log(response);
       console.log(response.earnings);
       if (response.success) {
@@ -47,9 +51,11 @@ const ProfilePage = () => {
 
   const fetchUserPosts = async (userId: number)=>{
     try{
+      setLoading(true)
       const posts = await getUserBlogs(userId)
       setUserPosts(posts);
       console.log("posts fetched", posts)
+      setLoading(false)
     }catch(err){
       console.log("Error fetching", err)
     }
@@ -65,7 +71,6 @@ const ProfilePage = () => {
       } catch (error) {
         console.error("Error fetching user:", error);
       } finally {
-        setLoading(false);
       }
     };
 
@@ -93,11 +98,9 @@ const ProfilePage = () => {
     }
   }
 
-  if (!session || !userEmail) {
+  if (status == "loading") {
     return (
-      <div className="w-full h-min-screen flex items-center justify-center">
-        Sign Up/IN First
-      </div>
+      <ProfilePageLoading/>
     );
   }
 
@@ -108,10 +111,14 @@ const ProfilePage = () => {
         <div className="flex justify-between mb-6">
           <div className="flex gap-4">
             <div className="flex flex-col space-y-1">
-              <h1>GOOD MORNING</h1> <span className="text-green-950 font-bold text-3xl">{user.name}</span>
+              <h1>GOOD MORNING</h1> <span className="text-green-950 font-bold text-3xl">{user.name || "solana user"}</span>
             </div>
-            <ViewsButton/>
-            <UpdateViewsEarningButton email={user.email}/>
+            {session?.user || publicKey ?
+              <>
+                <ViewsButton/>
+                <UpdateViewsEarningButton email={user.email}/>
+              </>
+            : null}
           </div>
           <div className="">
               <div className="flex items-center space-x-6">
@@ -181,8 +188,8 @@ const ProfilePage = () => {
             <p>Your Blogs</p>
             <p className=" cursor-pointer text-green-950" onClick={()=>{router.push('/blogs')}}>{`More->`} </p>
           </h3>
+          {userPosts.length == 0 && <div className="bg-green-950 text-green-50 text-2xl lg:p-32 p-12 font-bold">No Blogs Are Posted yet</div>}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            
             {userPosts.map((post, idx) => (
               <div key={idx} className="bg-white-100 p-0 rounded-lg shadow-lg" onClick={()=>{router.push(post.postUrl)}}>
                 <img className="rounded-lg" src={post.imageUrl} alt="solana post url" />

@@ -2,6 +2,7 @@
 import { getLearningContent } from '@/actions/LearnActions'  
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'  
+import LearnPageLoading from '../loading/LearnPageLoading';
 
 const LearnPage = ({type}:{type: string}) => {  
     const [Learn, setLearn] = useState<any[]>([]);  
@@ -25,7 +26,9 @@ const LearnPage = ({type}:{type: string}) => {
     }, [])  
 
     if(loading){  
-        return <div>Loading...</div>  
+        return <div>
+            <LearnPageLoading/>
+        </div>  
     }  
     console.log(Learn, "Learn")
     return (  

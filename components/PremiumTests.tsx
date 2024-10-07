@@ -11,7 +11,7 @@ import { useSession } from "next-auth/react";
 const PremiumTestPage = () => {
   const router = useRouter();
   const [tests, setTests] = useState<any[]>([]); // Use an array, not null
-  const [loading, setLoading] = useState(true); // Set loading state
+  const [loading, setLoading] = useState(false); // Set loading state
   const [user, setUser] = useState<any>({}); // Use an object, not null
   const {data: session} = useSession()
 
@@ -23,8 +23,6 @@ const PremiumTestPage = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      setLoading(true);
-    
       // Check if the session or email is missing
     //   if (!session?.user?.email) {
     //     console.log("User email not found");
@@ -33,8 +31,10 @@ const PremiumTestPage = () => {
     
       try {
         // Assuming getUser is an async function, you should await it
-        const user = await getUser("shaa1891640@gmail.com");
-        
+        if(!session || !session.user || !session.user.email){
+          return ;
+        }
+        const user = await getUser(session?.user?.email);
         // Check if the user was found
         console.log("user found", user);
         setUser(user);  // Assuming setUser is a state setter function
@@ -47,6 +47,7 @@ const PremiumTestPage = () => {
 
     const fetchTests = async () => {
       try {
+        setLoading(true);
         const fetchedTests = await getTests();
         console.log(fetchedTests)
         if (fetchedTests && fetchedTests.length > 0) {
@@ -64,16 +65,6 @@ const PremiumTestPage = () => {
     fetchUser();
     fetchTests();
   }, []);
-
-  // Loading state handling
-  if (loading) {
-    return <div>Loading tests...</div>;
-  }
-
-  // Handling no tests available
-  if (tests.length === 0) {
-    return <div>No more tests are available</div>;
-  }
 
   return (
     <div className="mt-12">

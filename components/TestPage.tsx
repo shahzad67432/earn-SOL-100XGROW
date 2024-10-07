@@ -7,11 +7,12 @@ import { useRouter } from "next/navigation";
 import { getTests } from "@/actions/test";
 import { getUser } from "@/actions/user";
 import { useSession } from "next-auth/react";
+import TestPageLoading from "./loading/TestPageLoading";
 
 const TestPage = ({type}:{type: string}) => {
   const router = useRouter();
   const [tests, setTests] = useState<any[]>([]); // Use an array, not null
-  const [loading, setLoading] = useState(true); // Set loading state
+  const [loading, setLoading] = useState(false); // Set loading state
   const [user, setUser] = useState<any>({}); // Use an object, not null
   const {data: session} = useSession()
 
@@ -23,7 +24,6 @@ const TestPage = ({type}:{type: string}) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      setLoading(true);
       console.log("session", session);
       console.log("session email from fetch user", session?.user?.email);
     
@@ -54,13 +54,13 @@ const TestPage = ({type}:{type: string}) => {
         console.log("fetched tests",fetchedTests)
         if (fetchedTests && fetchedTests.length > 0) {
           setTests(fetchedTests); // Set tests if fetched
+          setLoading(false);
         } else {
           setTests([]); // Set an empty array if no tests are found
         }
+        setLoading(false); // Set loading to false once fetching is done
       } catch (error) {
         console.error("Failed to fetch tests:", error);
-      } finally {
-        setLoading(false); // Set loading to false once fetching is done
       }
     };
 
@@ -70,12 +70,7 @@ const TestPage = ({type}:{type: string}) => {
 
   // Loading state handling
   if (loading) {
-    return <div>Loading tests...</div>;
-  }
-
-  // Handling no tests available
-  if (tests.length === 0) {
-    return <div>No more tests are available</div>;
+    return <div> <TestPageLoading/> </div>;
   }
 
   return (

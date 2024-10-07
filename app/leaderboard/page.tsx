@@ -48,7 +48,7 @@ const Page = () => {
   }, []);
 
   return (  
-    <div className="flex flex-col md:flex-row md:flex md:flex-between lg:pl-20 my-8 gap-16 w-full">  
+    <div className="flex flex-col md:flex-row md:flex md:flex-between min-h-[80vh] lg:pl-20 my-8 gap-16 w-full">  
       {/* Left Side: Leaderboard and Tests */}  
       <div className="flex flex-col w-full md:w-[66%]">  
         <h2 className="text-3xl font-bold text-green-600 mb-4">Leaderboard</h2>  

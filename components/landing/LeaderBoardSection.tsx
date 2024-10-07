@@ -26,7 +26,7 @@ const LeaderboardSection: React.FC = () => {
           {[
             { icon: Trophy, title: "Competitive Tests", description: "Each test has its own leaderboard. Showcase your knowledge and compete with others to reach the top." },
             { icon: Users, title: "Top Performers", description: "The top 10% of quiz takers on each leaderboard qualify for bounty rewards. Consistency is key!" },
-            { icon: Coins, title: "Earn Bounties", description: "Bounties are distributed from the pool of premium test fees. The higher you rank, the more you earn!" }
+            { icon: Coins, title: "Earn Bounties", description: "Bounties are distributed from the pool of premium test fees. The higher you rank, the more chances to earn! SOL" }
           ].map((item, index) => (
             <motion.div
               key={index}
@@ -91,7 +91,7 @@ const LeaderboardSection: React.FC = () => {
           transition={{ duration: 0.6, delay: 1.8 }}
         >
           <a 
-            href="#start-competing" 
+            href="/leaderboard" 
             className="inline-block bg-gradient-to-r from-green-600 to-green-500 text-white px-10 py-4 rounded-lg text-xl font-semibold hover:from-green-500 hover:to-green-400 transition duration-300 shadow-lg transform hover:-translate-y-1"
           >
             Start Competing Now

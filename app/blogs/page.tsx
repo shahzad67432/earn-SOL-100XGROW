@@ -31,7 +31,7 @@ const BlogPage = () => {
   const [topUsersByEarnings, setTopUsersByEarnings] = useState<UserByEarnings[]>([]);
   const [posts, setPosts] = useState<Post[]>([]);
   const [mainPost, setMainPost] = useState<Post | null>(null); // State for main post
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const router = useRouter()
   
   const fetchPosts = async () => {
@@ -58,7 +58,9 @@ const BlogPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true)
       const { success, topUsersByViews, topUsersByEarnings } = await fetchUserActionForBlogs();
+      setLoading(false);
       if (success) {
         setTopUsersByViews(topUsersByViews ?? []);
         setTopUsersByEarnings(topUsersByEarnings ?? []);
@@ -71,7 +73,6 @@ const BlogPage = () => {
           await fetchMainPost(topUser.id); // Fetch posts for this user
         }
       }
-      setLoading(false);
     };
 
     fetchPosts();
@@ -79,7 +80,7 @@ const BlogPage = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>; // Display loading indicator
+    return <div>Loading...</div>;
   }
 
   return (

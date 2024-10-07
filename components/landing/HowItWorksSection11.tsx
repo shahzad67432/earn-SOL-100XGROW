@@ -90,7 +90,7 @@ const HowItWorksSection: React.FC = () => {
                 <ul className="list-disc list-inside text-green-800 space-y-2">
                   <li>Choose your topic and difficulty level</li>
                   <li>Write engaging and informative content</li>
-                  <li>Add code snippets and examples where relevant</li>
+                  <li>Add code snippets and examples where relevant using the rich text editor</li>
                 </ul>
               </motion.div>
               <motion.div 
@@ -99,7 +99,7 @@ const HowItWorksSection: React.FC = () => {
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <h4 className="text-xl font-semibold text-green-950 mb-4">Earn Based on Engagement</h4>
-                <p className="text-green-800 mb-4">The more views and interactions your blog receives, the more you earn.</p>
+                <p className="text-green-800 mb-4">The more views and interactions your blog receives, the more you earn <span className='text-green-600'>SOL.</span> </p>
                 <div className="flex items-center justify-between text-green-950">
                   <span>Views</span>
                   <span className="text-2xl font-bold">→</span>
@@ -117,7 +117,7 @@ const HowItWorksSection: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.6 }}
         >
           <a 
-            href="#get-started" 
+            href="/contest" 
             className="text-start inline-block bg-green-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition duration-300"
           >
             Start Learning & Earning
