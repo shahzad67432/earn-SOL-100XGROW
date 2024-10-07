@@ -43,17 +43,17 @@ const Page = () => {
     }
   };
 
-  const handleSubmitButton = ()=>{
-    if(!session?.user?.email){
+  const handleSubmitButton = (e: React.MouseEvent) => {
+    if (!session?.user?.email) {
       setIsAuthModalOpen(true);
-    }else{
-      handleSubmitButton();
+    } else {
+      handleSubmit(e);
     }
-  }
+  };
   
   return (
     <>
-      <div className='w-full h-[100vh] bg-green-50'>
+      <div className='w-full min-h-[100vh] bg-green-50'>
         <div className="flex flex-col lg:flex-row max-w-screen-xl mx-auto mt-8 bg-green-50">
           {/* Post Form Section */}
           <div className="w-full lg:w-2/3 p-6 bg-green-50 rounded-lg shadow-md">
@@ -88,7 +88,7 @@ const Page = () => {
             {/* Submit Button */}
             <button
               className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-500 transition duration-300"
-              onClick={handleSubmitButton}
+              onClick={(e)=>{handleSubmitButton(e)}}
             >
               Publish
             </button>
