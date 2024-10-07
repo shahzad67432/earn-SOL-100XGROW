@@ -71,7 +71,7 @@ const ProfileDashboardSection: React.FC = () => {
               <div className="relative z-10">
                 <h3 className="text-3xl font-semibold mb-6">SOL-Based Transactions</h3>
                 <p className="text-lg mb-8">
-                  Experience the future of digital transactions with Solana's blazing-fast and cost-effective blockchain technology.
+                  Experience the future of digital transactions with blazing-fast and cost-effective blockchain technology of Solana.
                 </p>
                 <ul className="space-y-4 mb-8">
                   <li className="flex items-center">

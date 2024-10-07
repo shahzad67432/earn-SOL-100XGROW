@@ -65,7 +65,7 @@ const HowItWorksBlogs: React.FC = () => {
               Gain Visibility
             </h3>
             <p className="mb-6">
-              As your blog posts gain traction and views, you'll start earning SOL based on their popularity.
+              As your blog posts gain traction and views, you will start earning SOL based on their popularity.
             </p>
             <div className="bg-green-100 rounded-lg p-4 mb-6">
               <h4 className="font-semibold mb-2">Earning potential:</h4>
@@ -96,7 +96,7 @@ const HowItWorksBlogs: React.FC = () => {
               Withdraw Earnings
             </h3>
             <p className="mb-6">
-              Transfer your earned SOL directly to your connected Solana wallet whenever you're ready.
+              Transfer your earned SOL directly to your connected Solana wallet whenever you are ready.
             </p>
             <div className="bg-green-100 rounded-lg p-4 mb-6">
               <h4 className="font-semibold mb-2">Withdrawal process:</h4>

@@ -35,7 +35,7 @@ const LoginPage: React.FC = () => {
         <p className="text-center text-gray-600 mb-8">Sign in to access your account</p>
         <GoogleAuthButton />
         <p className="mt-6 text-center text-sm text-gray-600">
-          Don't have an account?{' '}
+          Do not have an account?{' '}
           <a href="/signup" className="text-green-600 hover:text-green-800 font-medium">
             Sign up here
           </a>

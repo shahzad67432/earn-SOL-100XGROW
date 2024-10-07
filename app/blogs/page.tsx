@@ -19,18 +19,18 @@ type UserByEarnings = {
 };
 
 type Post = {
-  id: number; // Assuming you have an ID for the post
+  id: number;
   title: string;
-  imageUrl: string; // Assuming the post has an image URL
+  imageUrl: string;
   postUrl: string;
 };
 
 const BlogPage = () => {
-  // Explicitly define the types for state variables
+  
   const [topUsersByViews, setTopUsersByViews] = useState<UserByViews[]>([]);
   const [topUsersByEarnings, setTopUsersByEarnings] = useState<UserByEarnings[]>([]);
   const [posts, setPosts] = useState<Post[]>([]);
-  const [mainPost, setMainPost] = useState<Post | null>(null); // State for main post
+  const [mainPost, setMainPost] = useState<Post | null>(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter()
   
@@ -47,9 +47,9 @@ const BlogPage = () => {
 
   const fetchMainPost = async (userId: number) => {
     try {
-      const userPosts = await getUserBlogs(userId); // Fetch posts for the top user
+      const userPosts = await getUserBlogs(userId); 
       if (userPosts.length > 0) {
-        setMainPost(userPosts[0]); // Set the main post to the first one
+        setMainPost(userPosts[0]); 
       }
     } catch (error) {
       console.log("Error fetching user's posts", error);
@@ -80,7 +80,7 @@ const BlogPage = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className='flex min-h-[80vh] justify-center items-center text-green-950 text-3xl '>Loading...</div>;
   }
 
   return (

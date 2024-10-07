@@ -85,7 +85,7 @@ const StepCard: React.FC<{ number: number; title: string; description: string }>
 const TestimonialCard: React.FC<{ quote: string; author: string }> = ({ quote, author }) => {
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
-      <p className="italic mb-4">"{quote}"</p>
+      <p className="italic mb-4">`&quot`{quote}`&quot`</p>
       <p className="font-semibold text-right">- {author}</p>
     </div>
   );
