@@ -7,6 +7,7 @@ export const authOptions = ({
       clientSecret: process.env.CLIENT_SECRET || '',
     })
   ],
+  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     // TODO: can u fix the type here? Using any is bad
     async session({ token, session }: any) {

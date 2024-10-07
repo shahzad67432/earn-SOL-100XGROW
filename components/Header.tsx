@@ -32,7 +32,7 @@ export const Appbar = () => {
         <motion.div 
           className="text-3xl font-bold"
         >
-          <Link href="/" className="text-green-800 hover:text-green-600 transition-colors duration-300">100xGrow</Link>
+          <Link href="/" className="text-green-800 hover:text-green-600 transition-colors duration-300">100xSOL</Link>
         </motion.div>
 
         {/* Middle: Navigation Links (hidden on mobile) */}
