@@ -2,14 +2,16 @@
 import React, { useState } from 'react';
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import WalletButton from "./ui/Buttons/WalletButton";
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export const Appbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { data: session } = useSession();
   const router = useRouter();
+  const path = usePathname()
 
   const handleSignup = () => {
     router.push('/signup');
@@ -19,22 +21,40 @@ export const Appbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  if(path == '/login' || path == '/signup') {
+    return null;
+  }
+
   return (
-    <header className="text-gray-600 px-4 sm:px-6 lg:px-12 py-4 sm:py-6 bg-green-50">
+    <header className="bg-gradient-to-r from-green-50 to-green-100 px-4 sm:px-6 lg:px-24 py-4 sm:py-6 shadow-md">
       <div className="container mx-auto flex flex-wrap justify-between items-center">
         {/* Left: Logo */}
-        <div className="text-2xl font-bold">
-          <Link href="/" className="text-green-950">100xGrow</Link>
-        </div>
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-3xl font-bold"
+        >
+          <Link href="/" className="text-green-800 hover:text-green-600 transition-colors duration-300">100xGrow</Link>
+        </motion.div>
 
         {/* Middle: Navigation Links (hidden on mobile) */}
         <nav className="hidden lg:flex space-x-6">
-          <Link href="/profile" className="hover:text-green-700">Profile</Link>
-          <Link href="/contest" className="hover:text-green-700">Quizzes</Link>
-          <Link href="/blogs" className="hover:text-green-700">Community</Link>
-          <Link href="/learn" className="hover:text-green-700">Learn</Link>
-          <Link href="/leaderboard" className="hover:text-green-700">Leaderboard</Link>
-          <Link href="/publishpost" className="hover:text-green-700">Post</Link>
+          {['Profile', 'Quizzes', 'Community', 'Learn', 'Leaderboard', 'Post'].map((item, index) => (
+            <motion.div
+              key={item}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <Link 
+                href={`/${item.toLowerCase()}`} 
+                className="text-green-700 hover:text-green-500 transition-colors duration-300 font-medium"
+              >
+                {item}
+              </Link>
+            </motion.div>
+          ))}
         </nav>
 
         {/* Right: Wallet and Auth Buttons */}
@@ -43,28 +63,33 @@ export const Appbar = () => {
           <WalletButton />
 
           {/* Auth Button (hidden on mobile) */}
-          <div className="hidden lg:block">
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="hidden lg:block"
+          >
             {session ? (
               <button
                 onClick={() => signOut()}
-                className="bg-green-950 hover:bg-red-700 px-6 py-3 rounded-md text-white"
+                className="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-md text-white font-medium transition-colors duration-300"
               >
                 Logout
               </button>
             ) : (
               <button
                 onClick={handleSignup}
-                className="bg-green-700 hover:bg-green-950 px-4 py-2 rounded-md text-white"
+                className="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-md text-white font-medium transition-colors duration-300"
               >
                 Signup
               </button>
             )}
-          </div>
+          </motion.div>
 
           {/* Mobile menu button */}
           <button
             onClick={toggleMenu}
-            className="lg:hidden text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="lg:hidden text-green-700 hover:text-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 rounded-md"
           >
             {isMenuOpen ? (
               <X className="h-6 w-6" />
@@ -75,35 +100,46 @@ export const Appbar = () => {
         </div>
 
         {/* Mobile menu (hidden on larger screens) */}
-        {isMenuOpen && (
-          <div className="w-full lg:hidden mt-4">
-            <nav className="flex flex-col space-y-4">
-              <Link href="/profile" className="hover:text-green-700">Profile</Link>
-              <Link href="/contest" className="hover:text-green-700">Quizzes</Link>
-              <Link href="/blogs" className="hover:text-green-700">Community</Link>
-              <Link href="/learn" className="hover:text-green-700">Learn</Link>
-              <Link href="/leaderboard" className="hover:text-green-700">Leaderboard</Link>
-              <Link href="/publishpost" className="hover:text-green-700">Post</Link>
-            </nav>
-            <div className="mt-4">
-              {session ? (
-                <button
-                  onClick={() => signOut()}
-                  className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md text-white w-full"
-                >
-                  Logout
-                </button>
-              ) : (
-                <button
-                  onClick={handleSignup}
-                  className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-md text-white w-full"
-                >
-                  Signup
-                </button>
-              )}
-            </div>
-          </div>
-        )}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div 
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="w-full lg:hidden mt-4 bg-white rounded-md shadow-lg overflow-hidden"
+            >
+              <nav className="flex flex-col">
+                {['Profile', 'Quizzes', 'Community', 'Learn', 'Leaderboard', 'Post'].map((item, index) => (
+                  <Link 
+                    key={item}
+                    href={`/${item.toLowerCase()}`} 
+                    className="px-4 py-3 text-green-700 hover:bg-green-50 transition-colors duration-300"
+                  >
+                    {item}
+                  </Link>
+                ))}
+              </nav>
+              <div className="p-4">
+                {session ? (
+                  <button
+                    onClick={() => signOut()}
+                    className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md text-white w-full transition-colors duration-300"
+                  >
+                    Logout
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleSignup}
+                    className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-md text-white w-full transition-colors duration-300"
+                  >
+                    Signup
+                  </button>
+                )}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </header>
   );

@@ -1,39 +1,48 @@
-"use client";
+"use client"
+import React from 'react';
+import { motion } from 'framer-motion';
+import GoogleAuthButton from '@/components/ui/Buttons/GoogleAuthButton';
 
-import { CheckFeature } from "@/components/CheckFeature";
-import { LoginButton } from "@/components/LoginButton";
-import GoogleAuthButton from "@/components/ui/Buttons/GoogleAuthButton";
-
-export default function Login() {
-    
-    return <div> 
-        <div className="flex justify-center">
-            <div className="flex pt-8 max-w-4xl">
-                <div className="flex-1 pt-20 px-4">
-                    <div className="font-semibold text-3xl pb-4">
-                    Join millions worldwide who automate their work using Zapier.
-                    </div>
-                    <div className="pb-6 pt-4">
-                        <CheckFeature label={"Easy setup, no coding required"} />
-                    </div>
-                    <div className="pb-6">
-                        <CheckFeature label={"Free forever for core features"} />
-                    </div>
-                    <CheckFeature label={"14-day trial of premium features & apps"} />
-
-                </div>
-                <div className="flex-1 pt-6 pb-6 mt-12 px-4 border rounded">
-                    <div className="flex justify-center text-2xl font-bold ">
-                        OAuth For Blog Auttomation
-                    </div>
-                    <p className="font-thin flex justify-center items-center pt-4 px-12">
-                        For your blog automation the only thing neccessary is your signin, Unlock the power of automated blogging, Streamline your content, amplify your reach
-                    </p>
-                    <div className="pt-20 mx-8">
-                        <GoogleAuthButton/>
-                    </div>
-                </div>
-            </div>
-        </div>
+const LoginPage: React.FC = () => {
+  return (
+    <div className="min-h-screen bg-green-50 flex items-center justify-center relative overflow-hidden">
+      <motion.div 
+        className="absolute top-10 left-10 w-20 h-20 bg-green-200 rounded-full"
+        animate={{
+          scale: [1, 1.2, 1],
+          rotate: [0, 180, 360],
+        }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          repeatType: "reverse"
+        }}
+      />
+      <motion.div 
+        className="absolute bottom-10 right-10 w-32 h-32 bg-green-300 rounded-full"
+        animate={{
+          y: [0, -20, 0],
+          x: [0, 20, 0],
+        }}
+        transition={{
+          duration: 7,
+          repeat: Infinity,
+          repeatType: "reverse"
+        }}
+      />
+      <div className="bg-white p-8 rounded-lg shadow-xl w-96 z-10">
+        <h2 className="text-3xl font-bold mb-6 text-center text-green-800">Welcome Back</h2>
+        <p className="text-center text-gray-600 mb-8">Sign in to access your account</p>
+        <GoogleAuthButton />
+        <p className="mt-6 text-center text-sm text-gray-600">
+          Don't have an account?{' '}
+          <a href="/signup" className="text-green-600 hover:text-green-800 font-medium">
+            Sign up here
+          </a>
+        </p>
+      </div>
     </div>
-}
+  );
+};
+
+export default LoginPage;

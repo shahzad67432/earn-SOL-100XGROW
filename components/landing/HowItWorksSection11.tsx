@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { PenSquare, BookOpen, Trophy, Currency } from 'lucide-react';
+import { BiMoney, BiTrophy } from 'react-icons/bi';
 
 const HowItWorksSection: React.FC = () => {
   const cards = [
@@ -17,7 +18,12 @@ const HowItWorksSection: React.FC = () => {
       description: "Participate in basic, premium, and contest quizzes to test your knowledge.",
     },
     {
-      icon: <Trophy className="w-12 h-12 text-green-600" />,
+      icon: <BiMoney className="w-12 h-12 text-green-600" />,
+      title: "Earn Money",
+      description: "outperform in tests pay a minimum amount of money and get the full pot of sol",
+    },
+    {
+      icon: <BiTrophy className="w-12 h-12 text-green-600" />,
       title: "Climb Leaderboards",
       description: "Top 10% of quiz performers earn bounties from premium test fees.",
     },
@@ -40,16 +46,16 @@ const HowItWorksSection: React.FC = () => {
           How It Works
         </motion.h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 px-12">
           <motion.div 
-            className="bg-white rounded-lg border-t-2 border-r-2 border-t-green-950 border-r-green-950  p-8"
+            className="bg-green-950 rounded-lg border-t-2 border-r-2 border-t-green-950 border-r-green-950  p-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h3 className="text-2xl font-semibold text-green-950 mb-6">Earn from Quizzes</h3>
+            <h3 className="text-2xl font-semibold text-green-50 mb-6">Earn from Quizzes</h3>
             <div className="space-y-6">
-              {cards.slice(0, 2).map((card, index) => (
+              {cards.slice(0, 3).map((card, index) => (
                 <motion.div 
                   key={index}
                   className="flex items-start space-x-4 bg-green-100 rounded-lg p-4"
