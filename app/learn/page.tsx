@@ -69,7 +69,7 @@ const Learn = () => {
           {/* Render the two test categories */}  
           <h1 className="text-3xl font-semibold mt-8 pl-8 opacity-65">Beginner Guide</h1>  
           <div className="pl-12 py-6">  
-            <LearnPage type="Beginner" />  
+            <LearnPage type="Beginner" />
           </div>
           
           <h1 className="text-3xl font-semibold mt-8 pl-8 opacity-65">Intermediate Guide</h1>  

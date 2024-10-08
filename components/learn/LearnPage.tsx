@@ -1,75 +1,79 @@
-"use client"  
-import { getLearningContent } from '@/actions/LearnActions'  
+"use client"
+import { getLearningContent } from '@/actions/LearnActions'
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react'  
+import React, { useEffect, useState } from 'react'
 import LearnPageLoading from '../loading/LearnPageLoading';
 
-const LearnPage = ({type}:{type: string}) => {  
-    const [Learn, setLearn] = useState<any[]>([]);  
-    const [loading, setLoading] = useState<boolean>(true);  
+const LearnPage = ({type}:{type: string}) => {
+    const [learn, setLearn] = useState<any[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
     const router = useRouter();
 
-    useEffect(()=>{  
-        const fetchLearn = async()=>{  
-            try{  
-                setLoading(true)  
-                const res = await getLearningContent();  
-                if(res.success && res.learn){  
-                    setLearn(res.learn)  
-                }  
-                setLoading(false)
-            }catch(err){  
-                console.error(err)  
-            }  
-        }  
-        fetchLearn();  
-    }, [])  
+    useEffect(() => {
+        const fetchLearn = async () => {
+            try {
+                setLoading(true)
+                const res = await getLearningContent();
+                if (res.success && res.learn) {
+                    
+                    const uniqueLearn = res.learn.reduce((acc: any[], current: any) => {
+                        const x = acc.find((item: any) => item.title === current.title);
+                        if (!x) {
+                            return acc.concat([current]);
+                        } else {
+                            return acc;
+                        }
+                    }, []);
+                    setLearn(uniqueLearn);
+                }
+                setLoading(false);
+            } catch (err) {
+                console.error(err)
+                setLoading(false);
+            }
+        }
+        fetchLearn();
+    }, [])
 
-    if(loading){  
-        return <div>
-            <LearnPageLoading/>
-        </div>  
-    }  
-    console.log(Learn, "Learn")
-    return (  
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">  
-            {Learn.filter((l) => l.type == type).map((l) => (  
-                <div   
-                    key={l.id} // Assuming each 'l' has a unique 'id' property  
-                    className="relative flex flex-col justify-between border rounded-lg shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-lg max-w-sm w-full cursor-pointer overflow-hidden"  
-                    style={{ height: '300px' }} // Set height to maintain square shape  
-                >  
-                    {/* Background Image */}  
-                    <div  
-                        className="absolute inset-0 bg-cover bg-center"  
-                        style={{  
-                        backgroundImage: `url('${l.learnImage[0]}')`, // Replace with actual image URL if needed  
-                        }}  
-                    ></div>  
+    if (loading) {
+        return <LearnPageLoading />;
+    }
 
-                    {/* Overlay for content */}  
-                    <div className="relative z-10 bg-gradient-to-t from-black to-transparent p-4 h-full flex flex-col justify-between">  
-                        {/* Test Title and Bounty */}  
-                        <div>  
-                            <h2 className="text-lg font-bold text-white">{l.title}</h2>  
-                        </div>  
+    const filteredLearn = learn.filter((l) => l.type === type);
+
+    return (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {filteredLearn.map((l) => (
+                <div
+                    key={l.id}
+                    className="relative flex flex-col justify-between border rounded-lg shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-lg max-w-sm w-full cursor-pointer overflow-hidden"
+                    style={{ height: '300px' }}
+                >
+                    <div
+                        className="absolute inset-0 bg-cover bg-center"
+                        style={{
+                            backgroundImage: `url('${l.learnImage[0]}')`,
+                        }}
+                    ></div>
+
+                    <div className="relative z-10 bg-gradient-to-t from-black to-transparent p-4 h-full flex flex-col justify-between">
+                        <div>
+                            <h2 className="text-lg font-bold text-white">{l.title}</h2>
+                        </div>
                         
-                        {/* Button to Learn */}  
-                        <div className="mt-6">  
-                            <button   
-                                className="w-full p-2 rounded-md bg-green-400 text-white hover:bg-green-500 transition-all duration-300"   
-                                onClick={() => {  
-                                    router.push(`/learn/${l.id}`)
-                                }}  
-                            >  
-                            Learn  
-                            </button>  
-                        </div>  
-                    </div>  
-                </div>  
-            ))}  
-        </div>  
-    );  
-}  
+                        <div className="mt-6">
+                            <button 
+                                className="w-full p-2 rounded-md bg-green-400 text-white hover:bg-green-500 transition-all duration-300"
+                                onClick={() => router.push(`/learn/${l.id}`)}
+                            >
+                                Learn
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+}
 
 export default LearnPage;

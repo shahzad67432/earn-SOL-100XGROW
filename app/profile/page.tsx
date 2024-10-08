@@ -27,7 +27,7 @@ const ProfilePage = () => {
   const {publicKey} = useWallet();
   const router = useRouter();
 
-  const userEmail = session?.user?.email ?? "";
+  const userEmail = session?.user?.email;
 
   const fetchUserEarnings = async (userId: number) => {
     try {

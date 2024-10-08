@@ -35,7 +35,7 @@ const TestPage = ({type}:{type: string}) => {
     
       try {
         // Assuming getUser is an async function, you should await it
-        const user = await getUser("shaa1891640@gmail.com");
+        const user = await getUser(session.user.email);
         
         // Check if the user was found
         console.log("user found", user);
