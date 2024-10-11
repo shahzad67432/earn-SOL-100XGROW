@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import Link from "next/link";
-import { useSession, signOut } from "next-auth/react";
+import { useSession, signOut, signIn } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import WalletButton from "./ui/Buttons/WalletButton";
 import { Menu, X, ChevronDown } from 'lucide-react';
@@ -72,10 +72,10 @@ export const Appbar = () => {
               </button>
             ) : (
               <button
-                onClick={handleSignup}
+                onClick={()=>signIn('google')}
                 className="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-md text-white font-medium transition-colors duration-300"
               >
-                Signup
+                Continue with Google
               </button>
             )}
           </motion.div>
@@ -124,7 +124,7 @@ export const Appbar = () => {
                   </button>
                 ) : (
                   <button
-                    onClick={handleSignup}
+                    onClick={()=> signIn('google')}
                     className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-md text-white w-full transition-colors duration-300"
                   >
                     Signup
