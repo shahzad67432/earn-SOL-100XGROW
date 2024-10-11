@@ -5,8 +5,10 @@ import { NextResponse } from "next/server";
 export const GET = async () => {
     //@ts-ignore
     const session = await getServerSession(authOptions);
+    // @ts-ignore
     if (session.user) {
         return NextResponse.json({
+            // @ts-ignore
             user: session.user
         })
     }
