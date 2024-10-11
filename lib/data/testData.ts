@@ -92,17 +92,16 @@ export const FOOTER_LINKS = [
   {
     title: 'Learn More',
     links: [
-      {label: 'About 100xGROW', link: '/'},
+      {label: 'About 100XSOL', link: '/'},
       {label: 'community', link:'/blogs'},
       {label: 'Solana Ecosystem', link: 'https://solana.com/'},
-      {label:'Careers', link:'https://jobs.solana.com/jobs'},
+      {label:'Solana Careers', link:'https://jobs.solana.com/jobs'},
     ],
   },
   {
     title: 'Our Community',
     links: [
-      {label: 'Solana Developers', link: 'https://solana.com/developers'},
-      {label:'Solana Investors', link: 'https://solana.com/'},
+      {label: 'linkedIn page', link: 'https://www.linkedin.com/in/shahzad-ali-225893298/?lipi=urn%3Ali%3Apage%3Ad_flagship3_job_home%3B1whunz1BRe%2B5qYy6FtRTXQ%3D%3D'},
     ],
   },
 ];

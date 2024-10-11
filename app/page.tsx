@@ -16,7 +16,7 @@ import HIWS from "@/components/landing/HIWS";
 export default function Home() {
   return (
     <>
-      <div className="bg-green-50 px-20">
+      <div className="bg-green-50 lg:px-20 px-2">
         <HeroSection/>
         <HowItWorksQuizzes11/>
         <LeaderboardSection/>
