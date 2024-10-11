@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { BookOpen, Code, Zap, Star, BarChart, ArrowRight } from 'lucide-react';
 
 const LearnSection: React.FC = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const learningPaths = [
     { icon: <BookOpen className="w-8 h-8 md:w-10 md:h-10" />, title: "Beginner", color: "bg-gradient-to-br from-green-200 to-green-300" },
     { icon: <Code className="w-8 h-8 md:w-10 md:h-10" />, title: "Intermediate", color: "bg-gradient-to-br from-green-300 to-green-400" },
@@ -88,11 +101,10 @@ const LearnSection: React.FC = () => {
         {floatingItems.map((item, index) => (
           <motion.div
             key={item.text}
-            className="absolute"
+            className={`absolute ${isMobile ? 'scale-80' : ''}`}
             style={{
               top: `${25 + index * 25}%`,
               left: index % 2 === 0 ? '5%' : '80%',
-              transform: `scale(${window.innerWidth < 768 ? 0.8 : 1})`,
             }}
             initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
             animate={{ 
