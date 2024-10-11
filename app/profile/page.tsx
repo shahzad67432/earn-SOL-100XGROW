@@ -105,11 +105,11 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className="min-h-screen px-12 bg-green-50">
+    <div className="min-h-screen lg:px-12 bg-green-50">
       <div className="container mx-auto py-8 px-6">
         {/* User Info Card */}
         <div className="flex justify-between mb-6">
-          <div className="flex gap-4">
+          <div className="flex lg:flex-row flex-col gap-4">
             <div className="flex flex-col space-y-1">
               <h1>GOOD MORNING</h1> <span className="text-green-950 font-bold text-3xl">{user.name || "solana user"}</span>
             </div>
@@ -142,7 +142,7 @@ const ProfilePage = () => {
             {/* Total Earnings */}
             <div className="bg-yellow-100 border-b border-b-blue-700 p-6 rounded-lg shadow-lg">
               <h3 className="text-xl font-semibold mb-4 text-black">Total Earnings</h3>
-              <p className="text-2xl font-bold text-gray-800">{totalEarning} SOL</p>
+              <p className="text-2xl font-bold text-gray-800">{totalEarning.toFixed(4)} SOL</p>
             </div>
 
             {/* Earnings from Blogs */}

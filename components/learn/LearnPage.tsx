@@ -1,4 +1,5 @@
 "use client"
+
 import { getLearningContent } from '@/actions/LearnActions'
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
@@ -15,7 +16,6 @@ const LearnPage = ({type}:{type: string}) => {
                 setLoading(true)
                 const res = await getLearningContent();
                 if (res.success && res.learn) {
-                    
                     const uniqueLearn = res.learn.reduce((acc: any[], current: any) => {
                         const x = acc.find((item: any) => item.title === current.title);
                         if (!x) {
@@ -46,8 +46,8 @@ const LearnPage = ({type}:{type: string}) => {
             {filteredLearn.map((l) => (
                 <div
                     key={l.id}
-                    className="relative flex flex-col justify-between border rounded-lg shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-lg max-w-sm w-full cursor-pointer overflow-hidden"
-                    style={{ height: '300px' }}
+                    className="relative flex flex-col justify-between border rounded-lg shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-lg w-full cursor-pointer overflow-hidden"
+                    style={{ minHeight: '250px', maxHeight: '300px' }}
                 >
                     <div
                         className="absolute inset-0 bg-cover bg-center"
@@ -55,15 +55,15 @@ const LearnPage = ({type}:{type: string}) => {
                             backgroundImage: `url('${l.learnImage[0]}')`,
                         }}
                     ></div>
-
+                    
                     <div className="relative z-10 bg-gradient-to-t from-black to-transparent p-4 h-full flex flex-col justify-between">
                         <div>
-                            <h2 className="text-lg font-bold text-white">{l.title}</h2>
+                            <h2 className="text-base sm:text-lg font-bold text-white line-clamp-2">{l.title}</h2>
                         </div>
                         
-                        <div className="mt-6">
+                        <div className="mt-auto">
                             <button 
-                                className="w-full p-2 rounded-md bg-green-400 text-white hover:bg-green-500 transition-all duration-300"
+                                className="w-full p-2 rounded-md bg-green-400 text-white hover:bg-green-500 transition-all duration-300 text-sm sm:text-base"
                                 onClick={() => router.push(`/learn/${l.id}`)}
                             >
                                 Learn

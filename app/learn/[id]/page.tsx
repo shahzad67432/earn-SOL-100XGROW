@@ -75,47 +75,47 @@ const LearnChildPage: React.FC = () => {
   const images = learn.learnImage || [];
 
   return (
-    <div className="bg-green-50 min-h-screen relative overflow-hidden cursor-none pt-12 px-44">
+    <div className="bg-green-50 min-h-screen relative overflow-hidden cursor-none pt-4 sm:pt-8 md:pt-12 px-4 sm:px-8 md:px-12 lg:px-24">
       {/* Custom cursor */}
       <div 
-        className="custom-cursor"
+        className="custom-cursor hidden sm:block"
         style={{
           left: `${cursorPosition.x}px`,
           top: `${cursorPosition.y}px`,
         }}
       />
 
-      <div className="container mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold text-green-800 mb-8">{learn.title}</h1>
+      <div className="container mx-auto px-4 py-8 sm:py-12">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-green-800 mb-6 sm:mb-8">{learn.title}</h1>
         
         {images[0] && (
-          <div className="mb-12">
-            <img src={images[0]} alt={learn.title} className="w-full h-64 object-cover rounded-lg shadow-lg" />
+          <div className="mb-8 sm:mb-12">
+            <img src={images[0]} alt={learn.title} className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-lg shadow-lg" />
           </div>
         )}
 
-        <div className="space-y-12 pt-12">
+        <div className="space-y-8 sm:space-y-12 pt-8 sm:pt-12">
           {contentChunks.map((chunk, index) => (
-            <div key={index} className="mb-12">
+            <div key={index} className="mb-8 sm:mb-12">
               {index % 2 === 0 ? (
-                <div className="flex flex-col md:flex-row items-center gap-8">
-                  <p className="text-green-700 md:w-1/2 leading-relaxed">{chunk}</p>
+                <div className="flex flex-col md:flex-row items-center gap-6 sm:gap-8">
+                  <p className="text-green-700 md:w-1/2 leading-relaxed text-sm sm:text-base">{chunk}</p>
                   {images[index + 1] && (
                     <img
                       src={images[index + 1]}
                       alt={`Image ${index + 1}`}
-                      className="w-full md:w-1/2 h-64 object-cover rounded-lg shadow-md"
+                      className="w-full md:w-1/2 h-48 sm:h-56 md:h-64 object-cover rounded-lg shadow-md mt-4 md:mt-0"
                     />
                   )}
                 </div>
               ) : (
-                <div className="flex flex-col md:flex-row-reverse items-center gap-8">
-                  <p className="text-green-700 md:w-1/2 leading-relaxed">{chunk}</p>
+                <div className="flex flex-col md:flex-row-reverse items-center gap-6 sm:gap-8">
+                  <p className="text-green-700 md:w-1/2 leading-relaxed text-sm sm:text-base">{chunk}</p>
                   {images[index + 1] && (
                     <img
                       src={images[index + 1]}
                       alt={`Image ${index + 1}`}
-                      className="w-full md:w-1/2 h-64 object-cover rounded-lg shadow-md"
+                      className="w-full md:w-1/2 h-48 sm:h-56 md:h-64 object-cover rounded-lg shadow-md mt-4 md:mt-0"
                     />
                   )}
                 </div>
@@ -124,10 +124,10 @@ const LearnChildPage: React.FC = () => {
           ))}
         </div>
 
-        <div className="mt-16 text-center">
-          <p className="text-green-700 mb-6 text-lg">Explore more topics to enhance your learning experience!</p>
+        <div className="mt-12 sm:mt-16 text-center">
+          <p className="text-green-700 mb-4 sm:mb-6 text-base sm:text-lg">Explore more topics to enhance your learning experience!</p>
           <button
-            className="bg-green-600 text-white py-3 px-6 rounded-full hover:bg-green-700 transition duration-300 text-lg font-semibold shadow-md"
+            className="bg-green-600 text-white py-2 sm:py-3 px-4 sm:px-6 rounded-full hover:bg-green-700 transition duration-300 text-base sm:text-lg font-semibold shadow-md"
             onClick={() => router.push('/learn')}
           >
             Explore More
@@ -152,14 +152,16 @@ const LearnChildPage: React.FC = () => {
           transform: translate(-50%, -50%) scale(1.5);
         }
 
-        /* Hide the default cursor */
-        body {
-          cursor: none;
-        }
+        /* Hide the default cursor on larger screens */
+        @media (min-width: 640px) {
+          body {
+            cursor: none;
+          }
 
-        /* Show default cursor on interactive elements for better UX */
-        a, button, input, textarea, select {
-          cursor: auto;
+          /* Show default cursor on interactive elements for better UX */
+          a, button, input, textarea, select {
+            cursor: auto;
+          }
         }
       `}</style>
     </div>
