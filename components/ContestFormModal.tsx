@@ -8,7 +8,7 @@ const FormModal = ({ isOpen, onClose }: { isOpen: any, onClose: any }) => {
   const [desc, setDesc] = useState<string>();
   const [duration, setDuration] = useState<any>();
   const [questions, setQuestions] = useState<any>();
-  const [threshold, setThreshold] = useState<any>();
+  const [thresholdValue, setThresholdValue] = useState<any>();
   const [type, setType] = useState<string>();
   const [imageUrl, setImageUrl] = useState<string>();
 
@@ -18,6 +18,7 @@ const FormModal = ({ isOpen, onClose }: { isOpen: any, onClose: any }) => {
     event.preventDefault();
 
     try {
+      const threshold = parseInt(thresholdValue)
       const postTest = await createTest({
         title,
         description: desc,
@@ -74,7 +75,7 @@ const FormModal = ({ isOpen, onClose }: { isOpen: any, onClose: any }) => {
             <input
               type="text"
               placeholder="threshold of the contest"
-              onChange={(e) => setThreshold(e.target.value)}
+              onChange={(e) => setThresholdValue(e.target.value)}
             />
             <label htmlFor=""></label>
             <input

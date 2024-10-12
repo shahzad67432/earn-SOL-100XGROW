@@ -11,7 +11,6 @@ export const createTest = async ({
     imageUrl
 }:any) => {
     try{
-        const thresholdValue = parseInt(threshold)
         const durationValue = parseInt(duration)
         await prisma.test.create({
             data:{
@@ -19,7 +18,7 @@ export const createTest = async ({
                 description: desc,
                 duration: durationValue,
                 questions,
-                threshold: thresholdValue,
+                threshold,
                 isContest: true,
                 type,
                 imageUrl
