@@ -18,7 +18,7 @@ const FormModal = ({ isOpen, onClose }: { isOpen: any, onClose: any }) => {
     event.preventDefault();
 
     try {
-      const threshold = parseInt(thresholdValue)
+      const threshold = parseFloat(thresholdValue)
       const postTest = await createTest({
         title,
         description: desc,
