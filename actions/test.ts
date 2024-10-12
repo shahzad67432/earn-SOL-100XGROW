@@ -40,6 +40,7 @@ export const getTests = async ()=>{
             isPremium: true,
             isContest: true,
             paidUsers: true,
+            threshold: true,
         }
     })
     return tests;

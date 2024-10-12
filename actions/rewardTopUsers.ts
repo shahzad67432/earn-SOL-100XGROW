@@ -6,6 +6,7 @@ export const rewardTopUsers = async (testId: number) => {
     try {
         const test = await prisma.test.findUnique({ where: { id: testId } });
         if(!test?.totalFee)return {success: "false", message: "test id not found"};
+        const WinningAmmount = test.totalFee - (test.totalFee / 10);
         const leaderboard = await prisma.leaderboard.findMany({
             where: { testId },
             orderBy: { highestScore: 'desc' },
@@ -21,7 +22,7 @@ export const rewardTopUsers = async (testId: number) => {
                 data: {
                     title: test.title,
                     totalEarnings: {
-                        increment: test.totalFee / top10PercentCount,
+                        increment: WinningAmmount / top10PercentCount,
                     }
                 }
             });

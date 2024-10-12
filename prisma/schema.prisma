@@ -52,6 +52,7 @@ model Test {
   paidUsers   Int @default(0)
   totalFee    Float?
   isContest   Boolean @default(false)
+  threshold   Float? @default(0)
   bountyAmount Float?
   leaderboard Leaderboard[]
   submissions Submission[]

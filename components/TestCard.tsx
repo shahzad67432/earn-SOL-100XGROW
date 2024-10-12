@@ -5,6 +5,7 @@ import { PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
 import React, { useState } from "react";
 import RewardTopUsers from "./ui/Buttons/RewardTopUsers";
 import AuthModal from "./AuthModal";
+import { deductTheCharityAmmount } from "@/actions/contestActions";
 
 interface TestCardProps {
   title: string;
@@ -19,8 +20,10 @@ interface TestCardProps {
   userId: number;
   fee: any;
   paidUsers: number;
+  isContest: boolean;
   isAdmin: boolean;
   totalFee: number;
+  threshold: number;
   onClick: () => void;
 }
 
@@ -37,6 +40,8 @@ const TestCard: React.FC<TestCardProps> = ({
   questions,
   duration,
   isAdmin,
+  isContest,
+  threshold,
   type,
   onClick,
 }) => {
@@ -75,6 +80,8 @@ const TestCard: React.FC<TestCardProps> = ({
         return alert("Please connect your wallet first")
       }
       await makePayment();
+      const charityAmmount = fee / 10;
+      await deductTheCharityAmmount(charityAmmount);
       const response = await handleTestPayment(userId, testId);
       if (response?.success) {
         alert("Payment successful. You can start the test now. User status updated.");
@@ -114,11 +121,15 @@ const TestCard: React.FC<TestCardProps> = ({
           {/* Test Title and Bounty */}
           <div>
             <h2 className="text-lg font-bold text-white">{title}</h2>
-            {isPremium && (
+            {isPremium ? (
               <span className="mt-2 inline-block bg-green-600 text-white px-3 py-1 rounded-full text-sm font-medium">
                 Bounty: {fee * paidUsers} SOL
               </span>
-            )}
+            ): isContest ? (
+              <span className="mt-2 inline-block bg-green-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                {threshold}
+              </span>
+            ): null}
           </div>
 
           {/* Questions, Duration */}
@@ -142,7 +153,23 @@ const TestCard: React.FC<TestCardProps> = ({
                   >
                     Start Test
                   </button>
-                ) : !isPremium ? (
+                ) :
+                  isContest && threshold < 0.01 ? (
+                    <button
+                      className="bg-gray-600 text-white py-2 px-4 rounded-md shadow hover:bg-gray-700 transition-colors"
+                    >
+                      threshold: {threshold}
+                    </button>
+                  ) : isContest && threshold == 0.01 ? (
+                    <button
+                    className="bg-yellow-500 text-white py-2 px-4 rounded-md shadow hover:bg-yellow-600 transition-colors"
+                    onClick={handleButtonClick}
+                    >
+                      Start Test
+                    </button>
+                  )
+                :
+                !isPremium ? (
                   <button
                     className="bg-gray-600 text-white py-2 px-4 rounded-md shadow hover:bg-gray-700 transition-colors"
                     onClick={handleButtonClick}
@@ -156,7 +183,7 @@ const TestCard: React.FC<TestCardProps> = ({
                   >
                     Pay SOL
                   </button>
-                ) : null}
+                ): null}
               </div>
             ): 
               <div>

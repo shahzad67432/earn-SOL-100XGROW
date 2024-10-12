@@ -73,6 +73,8 @@ const PremiumTestPage = () => {
         {tests.map((test: any) => (
                 <TestCard
                   key={test.id}
+                  isContest={test.contest}
+                  threshold={test.threshold}
                   isAdmin={true}
                   totalFee={test.totalFee}
                   paidUsers={test.paidUsers}

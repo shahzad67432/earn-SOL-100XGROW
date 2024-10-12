@@ -83,6 +83,8 @@ const TestPage = ({type}:{type: string}) => {
               {test.type === type && 
                 <TestCard
                   key={test.id}
+                  threshold={test.threshold}
+                  isContest={test.isContest}
                   isAdmin={true}
                   imageUrl={test.imageUrl}
                   totalFee={test.totalFee}

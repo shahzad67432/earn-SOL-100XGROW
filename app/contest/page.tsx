@@ -1,7 +1,10 @@
+"use client"
+import FormModal from "@/components/ContestFormModal";
 import TestPage from "@/components/TestPage";
-import React from "react";
+import React, { useState } from "react";
 
 const Page = () => {
+  const [formModal ,setFormModal] = useState<boolean>(false);
   return (
     <div className="min-h-screen bg-green-50">
       <div className="max-w-7xl mx-auto p-4">
@@ -21,7 +24,16 @@ const Page = () => {
           */}
         </div>
 
-        {/* Render the two test categories */}
+        {/* Render the three test categories */}
+        <div className="flex gap-4 text-center items-center">
+          <h1 className="text-2xl sm:text-3xl font-semibold sm:mt-8 px-4 sm:px-8 opacity-65">Contest</h1>
+          <button disabled={true} className=" p-2 mt-8 rounded-lg bg-green-950 text-green-50" onClick={()=>{setFormModal(true)}}>
+            Create Test
+          </button>
+        </div>
+        <FormModal onClose={()=> setFormModal(false)} isOpen={formModal}/>
+        <TestPage type="contest" />
+
         <h1 className="text-2xl sm:text-3xl font-semibold mt-6 sm:mt-8 px-4 sm:px-8 opacity-65">Premium Tests</h1>
         <TestPage type="premium" />
 
